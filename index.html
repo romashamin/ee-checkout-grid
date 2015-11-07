@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang='ru'>
+<head>
+  <meta charset='utf-8'>
+  <title>EE Checkout Responsive Demo</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
+
+<style>
+  html, body,
+  .content {
+    margin: 0;
+    padding: 0;
+    min-width: 320px;
+    background-color: white;
+    color: #696969;
+    font: 18px/22px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  div, button { -moz-box-sizing: border-box; box-sizing: border-box; }
+
+  .page-header, .page-footer { height: 92px; }
+
+  .page-header,
+  .page-footer,
+  .checkout-container {
+    width: 800px;
+    margin: 0 auto;
+  }
+
+  .checkout-container {
+    background-color: #F5F4F2;
+  }
+
+  .checkout-header,
+  .current-step {
+    /*padding-left:  130px;
+    padding-right: 130px;*/
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .checkout-header-content,
+  .current-step-content {
+    width: 540px;
+    margin: 0 auto;
+    /*background-color: aliceblue;*/
+  }
+
+  .checkout-header {
+    padding-top:    23px;
+    padding-bottom: 23px;
+    background-color: #F9F8F7;
+  }
+
+  .checkout-header__subtitle {
+    color: #9B9B9B;
+    text-transform: uppercase;
+    font-size:   10px;
+    line-height: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .checkout-header__title,
+  .current-step__title {
+    font-weight: 300;
+    font-size:   24px;
+    line-height: 29px;
+  }
+
+  .current-step {
+    padding-top: 20px;
+  }
+
+    .current-step__title {
+      margin-bottom: 38px;
+      /*background-color: lightgreen;*/
+    }
+
+    .current-step__title::before {
+      content: '1.';
+      display: inline;
+      float: left;
+      width: 40px;
+      margin-right: 12px;
+      margin-left: -52px;
+      padding-top: 6px;
+      text-align: right;
+      font-size: 18px;
+      font-weight: normal;
+      line-height: 22px;
+      /*background-color: lightyellow;*/
+    }
+
+  .subscription-options,
+  .checkout-submit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /*background-color: lightyellow;*/
+  }
+
+  .subscription-options__option,
+  .checkout-button-regular {
+    /* Reset */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    /* Style */
+    background: #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .subscription-options__option,
+  .checkout-button-regular,
+  .checkout-button-primary {
+    width: 264px;
+  }
+
+  .subscription-options__option {
+    margin: 0 0 12px 0;
+    padding: 20px 24px;
+    font-family: inherit;
+    color: inherit;
+    text-align: center;
+  }
+
+    .subscription-options__option-header {
+      margin-bottom: 14px;
+      font-weight: 300;
+      font-size:   34px;
+      line-height: 41px;
+    }
+
+    .subscription-options__option-header-sm {
+      display: block;
+      font-weight: normal;
+      font-size:   14px;
+      line-height: 16px;
+    }
+
+    .subscription-options__option-description {
+      font-size:   14px;
+      line-height: 16px;
+      color: #9B9B9B;
+    }
+
+    .subscription-options__option-note {
+      margin-top: 10px;
+      font-size:   10px;
+      line-height: 12px;
+      color: #9B9B9B;
+      letter-spacing: 0.3px;
+    }
+
+  .checkout-submit {
+    margin-top:     40px;
+    padding-top:    40px;
+    padding-bottom: 50px;
+    box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .checkout-button-regular,
+  .checkout-button-primary {
+    /* Reset */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    /* Style */
+    padding: 13px 20px;
+    font-family: inherit;
+    font-size:   20px;
+    line-height: 24px;
+  }
+
+  .checkout-button-regular {
+    color: #00D89A;
+  }
+
+  .checkout-button-primary {
+    color: #FFF;
+    background-color: #00D89A;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px 0 rgba(0, 216, 154, 0.45);
+  }
+
+  .checkout-hint {
+    margin-top:  8px;
+    font-size:   14px;
+    line-height: 16px;
+    color: #9B9B9B;
+  }
+
+  .no-break { white-space: nowrap; }
+
+  .phone { text-decoration: none; color: inherit; }
+
+  @media only screen and (min-device-width: 620px) and (max-device-width: 800px),
+         only screen and (min-width: 620px) and (max-width: 800px) {
+
+    .page-header,
+    .page-footer,
+    .checkout-container {
+      width: 100%;
+    }
+
+  }
+
+  @media only screen and (min-device-width: 320px) and (max-device-width: 620px),
+         only screen and (min-width: 320px) and (max-width: 620px) {
+
+    .page-header,
+    .page-footer,
+    .checkout-container {
+      width: 100%;
+    }
+
+    .checkout-header,
+    .current-step {
+      padding-left:  20px;
+      padding-right: 20px;
+    }
+
+    .checkout-header-content,
+    .current-step-content {
+      width: auto;
+      margin: 0 auto;
+      /*background-color: aliceblue;*/
+    }
+
+    .current-step__title {
+      margin-bottom: 28px;
+    }
+
+    .current-step__title::before {
+      width: 20px;
+      margin-left: 0;
+      margin-right: 0;
+      text-align: left;
+    }
+
+    .subscription-options__option {
+      width: 49.25%;
+      padding: 20px 10px;
+    }
+
+    .subscription-options__option-note {
+      display: none;
+    }
+
+    .checkout-submit {
+      margin-top:     30px;
+      padding-top:    30px;
+    }
+
+    .checkout-button-regular,
+    .checkout-button-primary {
+      width: 100%;
+      margin: 0 0 10px;
+    }
+
+    .phone { color: #00D89A; }
+
+  }
+
+</style>
+</head>
+<body>
+  <div class='content'>
+    <div class='page-header'></div>
+    <div class='checkout-container'>
+      <div class='checkout-header'>
+        <div class='checkout-header-content'>
+          <div class='checkout-header__subtitle'>Elementaree</div>
+          <div class='checkout-header__title'>Здоровье</div>
+        </div>
+      </div>
+      <div class='current-step'>
+        <div class='current-step-content'>
+          <div class='current-step__title'>Подписка</div>
+          <div class='subscription-options'>
+            <button class='subscription-options__option'>
+              <div class='subscription-options__option-header'>1200 <span class='subscription-options__option-header-sm'>₽/день</span></div>
+              <div class='subscription-options__option-description'>8000 ₽ каждую неделю</div>
+              <div class='subscription-options__option-note'>Автоматическое списание с банковской карты в начале каждой недели или наличные курьеру</div>
+            </button>
+            <button class='subscription-options__option'>
+              <div class='subscription-options__option-header'>965 <span class='subscription-options__option-header-sm'>₽/день</span></div>
+              <div class='subscription-options__option-description'>27 000 ₽ каждые 4 недели</div>
+              <div class='subscription-options__option-note'>Автоматическое списание с банковской карты в начале каждой недели или наличные курьеру</div>
+            </button>
+            <div class='checkout-hint'>Изменить подписку можно в любой момент по телефону <a class='phone no-break' href='tel:+7 495 648-65-44'>+7 495 648-65-44</a></div>
+          </div>
+          <div class='checkout-submit'>
+            <button class='checkout-button-regular'>Детали программы...</button>
+            <button class='checkout-button-primary'>К доставке</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='page-footer'></div>
+  </div>
+</body>
+</html>
